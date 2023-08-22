@@ -1,0 +1,67 @@
+/****************************************************************
+
+ Following is the class structure of the Node class:
+
+ class Node {
+     public int data;
+     public Node next;
+
+     Node()
+     {
+         this.data = 0;
+         this.next = null;
+     }
+
+     Node(int data)
+     {
+         this.data = data;
+         this.next = null;
+     }
+
+     Node(int data, Node next)
+     {
+         this.data = data;
+         this.next = next;
+     }
+ };
+
+ *****************************************************************/
+import java.util.*;
+
+public class Solution
+{
+    public static int lengthOfLoop(Node head) {
+        // Write your code here
+        
+        if(head == null || head.next == null){
+            return 0;
+        }
+        
+        Node temp = head;
+        Node ans = head;
+
+        boolean flag = false;
+        HashSet<Node> hs = new HashSet<>();
+
+        while(temp != null){
+            if(hs.contains(temp)){
+                ans = temp.next;
+                flag = true;
+                break;
+            }
+            hs.add(temp);
+            temp = temp.next;
+        }
+
+        if(flag == true){
+           int count = 1;
+           while(ans != temp) {
+               count++;
+               ans = ans.next;
+           }
+           return count;
+        }
+        
+        return 0;
+    }
+}
