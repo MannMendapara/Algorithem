@@ -1,0 +1,61 @@
+#include<iostream>
+#include<vector>
+#include<set>
+using namespace std;
+void setZeroes(vector<vector<int>>& matrix){
+ 
+    int rows = matrix.size();        
+    int columns = matrix[0].size(); 
+    set<int> zerorows; 
+    set<int> zerocol; 
+
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < columns; j++)
+        {
+             if(matrix[i][j]==0){
+               zerorows.insert(i);
+               zerocol.insert(j);
+             }
+        }
+    }
+
+    // set row 0
+    for (int row : zerorows)
+    {
+        
+        for (int  j = 0; j < rows ; j++)
+        {
+          matrix[row][j]=0;
+        }
+        
+    }
+    
+       for (int colmn : zerocol)
+    {
+        
+        for (int  i = 0; i < columns ; i++)
+        {
+          matrix[i][colmn]=0;
+        }
+        
+    }
+    
+
+
+    
+}
+
+int main(int argc, char const *argv[])
+{
+    vector<vector<int>> matrix = {{1, 2, 3}, {4, 0, 6}, {7, 8, 9}};
+    setZeroes(matrix);
+
+    for (const vector<int>& row : matrix) {
+        for (int num : row) {
+            cout << num << " ";
+        }
+        cout << endl;
+    }
+    return 0;
+}
