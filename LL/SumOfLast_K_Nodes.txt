@@ -1,0 +1,35 @@
+class Solution {
+
+    // Return the sum of last k nodes
+    public int sum(Node head, int k) {
+        // write code here
+        if (head == null)
+            return -1;
+
+        Node temp = head;
+        int count = 1;
+        while (temp.next != null) {
+            count++;
+            temp = temp.next;
+        }
+
+        int sp = count - k;
+
+        // Handle the case where k is greater than the length of the linked list
+        if (sp < 0)
+            return -1;
+
+        temp = head;
+        for (int i = 0; i < sp; i++) {
+            temp = temp.next;
+        }
+
+        int ans = 0;
+        while (temp != null) {
+            ans = ans + temp.data;
+            temp = temp.next;
+        }
+
+        return ans;
+    }
+}
