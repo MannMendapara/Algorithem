@@ -1,0 +1,60 @@
+#include<iostream>
+#include<unordered_set>
+using namespace std;
+
+struct node {
+    int data;
+    struct node* next;
+};
+
+struct node* Create(int data) {
+    struct node* newnode = new struct node;
+    newnode->data = data;
+    newnode->next = NULL;
+    return newnode;
+}
+
+void Display(struct node* Head) {
+    struct node* p = Head;
+    while (p != NULL) {
+        cout << p->data << " ";
+        p = p->next;
+    }
+    cout << endl;
+}
+
+struct node * RemoveDuplicate(struct node * Head){
+    unordered_set<int> seen;
+    struct node *curr=Head;
+    struct node *prev=NULL;
+
+    while (curr!=NULL)
+    {
+        
+        if(seen.find(curr->data)!=seen.end()){
+             prev->next=curr->next;
+             delete(curr);
+        }else{
+            seen.insert(curr->data);
+            prev=curr;
+        }
+        curr=prev->next;
+    }
+    return Head;
+
+}
+
+int main(int argc, char const* argv[]) {
+    struct node* p1, * p2, * p3, * p4;
+    p1 = Create(78);
+    p2 = Create(7); // Create p2 node
+    p1->next = p2;   // Link p1 to p2
+    p3 = Create(7);
+    p4 = Create(7);
+    p3->next = p4;   // Link p3 to p4
+    p2->next = p3;   // Link p2 to p3
+    Display(p1);
+   struct node *HEAD= RemoveDuplicate(p1);
+   Display(HEAD); 
+   return 0;
+}
