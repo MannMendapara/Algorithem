@@ -1,0 +1,19 @@
+class Solution {
+    
+    //Function to check whether two linked lists are identical or not.
+    public boolean isIdentical (Node head1, Node head2){
+        //write your code here 
+        if(head1==null || head2==null) return false;
+        Node fir = head1;
+        Node sec = head2;
+        while(fir != null && sec != null){
+            if(fir.data != sec.data) return false;
+            fir = fir.next;
+            sec = sec.next;
+        }
+        if(fir == null && sec == null) {
+            return true;
+        }
+        return false;
+    }
+}
